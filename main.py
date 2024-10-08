@@ -77,7 +77,7 @@ def export_paragraphs_to_excel(paragraphs, excel_file):
 
     # Write each paragraph into a new row in the Excel file
     for idx, para in enumerate(paragraphs, start=1):  # Start from row 1 for ordinal numbers
-        ws.append([ordinal(idx), para])
+        ws.append([idx, para])
         cell = ws[f'B{idx+1}']  # Paragraphs are in column B, row idx+1 (header in row 1)
         
         # Set wrap text to true to show long paragraphs on multiple lines
@@ -137,8 +137,7 @@ class PDFToExcelConverterApp(QtWidgets.QWidget):
 
     def browse_input(self):
         if self.file_or_folder_combo.currentText() == "File":
-            options = QFileDialog.Option()
-            pdf_file, _ = QFileDialog.getOpenFileName(self, "Select PDF File", "", "PDF Files (*.pdf);;All Files (*)", options=options)
+            pdf_file, _ = QFileDialog.getOpenFileName(self, "Select PDF File", "", "PDF Files (*.pdf);;All Files (*)")
             if pdf_file:
                 self.input_path_edit.setText(pdf_file)
         else:
